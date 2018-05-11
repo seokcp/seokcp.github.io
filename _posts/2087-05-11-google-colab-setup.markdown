@@ -68,8 +68,6 @@ print(torch.__version__)
 import sys
 print(sys.version_info)
 ```
-
-
 #### 2. **Google Drive** 마운트 하기
 
 구글 드라이브 마운트를 위해서는 다음 명령들을 실행시켜야 하는데 몇 번의 authorization 과정을 (암호입력) 요구합니다.
@@ -102,3 +100,23 @@ os.chdir("/home")
 !mkdir -p drive
 !google-drive-ocamlfuse drive
 ```
+
+#### 3. 설치된 라이브러리 확인하기
+
+새로운 노트북을 열때 마다 기존 노트북에서 세팅해 놓았던 환경들이 다 날아가 버리는 것처럼 보이는데 어떻게 자동적으로 환경을 올리는지를 몰라서 (가능한지도 모르겠음) 머신러닝에 필요하다가 생각되는 라이브러리를 체크해 주고 설치 되었으면 올려주는 간단한 파이썬 스크립트를 만들어 보았습니다.
+
+```python
+libnames = ['scipy', 'numpy', 'matplotlib', 'pandas', 'sklearn', 'pydotplus', 'h5py','tensorflow','keras', 'pytorch']
+
+for libname in libnames:
+  try:
+    lib = __import__(libname)
+  except ImportError:
+    print(libname + " is not installed")
+  else:
+    print(libname + " " + lib.__version__)
+```
+
+새로운 colab 노트북을 열자마자 스크립트를 실행해 본 화면 입니다.
+
+![라이브러리 체크](https://seokcp.github.io/images/colab_lib_list.png)
